@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contact.Domain.AggregatesModel.ContactInformationAggregate
+namespace Contact.Domain.AggregatesModel
 {
     public class ContactInformation : Entity
     {
