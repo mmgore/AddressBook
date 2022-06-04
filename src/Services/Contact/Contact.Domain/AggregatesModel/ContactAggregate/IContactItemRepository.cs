@@ -2,7 +2,7 @@
 
 namespace Contact.Domain.AggregatesModel.ContactAggregate
 {
-    public interface IContactRepository
+    public interface IContactItemRepository
     {
         Task InsertAsync(ContactItem item);
         Task UpdateAsync(ContactItem item);
