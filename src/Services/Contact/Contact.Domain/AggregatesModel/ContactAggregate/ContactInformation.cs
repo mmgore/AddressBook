@@ -16,6 +16,9 @@ namespace Contact.Domain.AggregatesModel.ContactAggregate
             Content = !string.IsNullOrWhiteSpace(content) ? content : throw new ContactDomainException("Content cannot be null");
         }
 
-        
+        public static ContactInformation Create(Guid contactId, string phoneNumber, string emailAddress, string location, string content)
+        {
+            return new ContactInformation(contactId, phoneNumber, emailAddress, location, content);
+        }
     }
 }
