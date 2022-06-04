@@ -2,11 +2,6 @@
 using Contact.Domain.SeedWork;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Contact.Application.Commands.CreateContact
 {
