@@ -3,18 +3,18 @@ using Contact.Domain.SeedWork;
 
 namespace Contact.Domain.AggregatesModel.ContactAggregate
 {
-    public class Contact : Entity
+    public class ContactItem : Entity
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Firm { get; private set; }
         public IList<ContactInformation> ContactInformations { get; private set; }
-        public Contact()
+        public ContactItem()
         {
             ContactInformations = new List<ContactInformation>();
         }
 
-        public Contact(string firstName, string lastName, string firm)
+        public ContactItem(string firstName, string lastName, string firm)
         {
             Id = Guid.NewGuid();
             FirstName = !string.IsNullOrWhiteSpace(firstName) ? firstName : throw new ContactDomainException("Firstname cannot be null");
@@ -23,9 +23,9 @@ namespace Contact.Domain.AggregatesModel.ContactAggregate
             CreatedDate = DateTime.Now;
         }
 
-        public static Contact Create(string firstName, string lastName, string firm)
+        public static ContactItem Create(string firstName, string lastName, string firm)
         {
-            return new Contact(firstName, lastName, firm);
+            return new ContactItem(firstName, lastName, firm);
         }
 
         public void AddContactInformation(Guid contactId,string phoneNumber, string emailAddress, string location, string content)

@@ -1,7 +1,7 @@
 ﻿using Contact.Domain.Exceptions;
 using Contact.Domain.SeedWork;
 
-namespace Contact.Domain.AggregatesModel
+namespace Contact.Domain.AggregatesModel.ContactAggregate
 {
     public class ContactInformation : Entity
     {
