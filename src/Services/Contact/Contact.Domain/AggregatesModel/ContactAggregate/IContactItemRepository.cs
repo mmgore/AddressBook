@@ -7,8 +7,8 @@ namespace Contact.Domain.AggregatesModel.ContactAggregate
         Task InsertAsync(ContactItem item);
         Task UpdateAsync(ContactItem item);
         Task DeleteAsync(ContactItem item);
-        Task<ContactItem> GetBuyerById(Guid id);
-        Task<ContactItem> GetBuyer(Expression<Func<ContactItem, bool>> predicate);
-        Task<IEnumerable<ContactItem>> GetBuyers();
+        Task<ContactItem> GetContactItemById(Guid id);
+        Task<ContactItem> GetContactItem(Expression<Func<ContactItem, bool>> predicate);
+        Task<IEnumerable<ContactItem>> GetContactItems();
     }
 }

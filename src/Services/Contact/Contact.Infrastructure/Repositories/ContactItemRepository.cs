@@ -1,11 +1,6 @@
 ﻿using Contact.Domain.AggregatesModel.ContactAggregate;
 using Contact.Domain.SeedWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Contact.Infrastructure.Repositories
 {
@@ -16,34 +11,28 @@ namespace Contact.Infrastructure.Repositories
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-        public Task DeleteAsync(ContactItem item)
+        public async Task DeleteAsync(ContactItem item)
         {
-            throw new NotImplementedException();
+             await _repository.DeleteAsync(item);
         }
 
-        public Task<ContactItem> GetBuyer(Expression<Func<ContactItem, bool>> predicate)
+        public async Task<ContactItem> GetContactItem(Expression<Func<ContactItem, bool>> predicate)
+            => await _repository.GetAsync(predicate);
+
+        public async Task<ContactItem> GetContactItemById(Guid id)
+            => await _repository.GetAsync(id);
+
+        public async Task<IEnumerable<ContactItem>> GetContactItems()
+            => await _repository.GetAllAsync();
+
+        public async Task InsertAsync(ContactItem item)
         {
-            throw new NotImplementedException();
+            await _repository.InsertAsync(item);
         }
 
-        public Task<ContactItem> GetBuyerById(Guid id)
+        public async Task UpdateAsync(ContactItem item)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<ContactItem>> GetBuyers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task InsertAsync(ContactItem item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(ContactItem item)
-        {
-            throw new NotImplementedException();
+            await _repository.UpdateAsync(item);
         }
     }
 }
