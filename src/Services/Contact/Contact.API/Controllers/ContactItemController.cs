@@ -1,6 +1,7 @@
 ﻿using Contact.Application.Commands.CreateContact;
 using Contact.Application.Commands.DeleteContact;
 using Contact.Application.Commands.UpdateContact;
+using Contact.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,5 +40,11 @@ namespace Contact.API.Controllers
         public async Task<IActionResult> DeleteContact([FromRoute] Guid id)
             => Ok(await _mediator.Send(new DeleteContactCommand(id)));
 
+        [Route("api/v1/Contacts/{contactId}")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<GetContactDto>> GetContactById(Guid contactId)
+            => Ok(await _mediator.Send(new GetContactByIdQuery { ContactId = contactId }));
     }
 }
