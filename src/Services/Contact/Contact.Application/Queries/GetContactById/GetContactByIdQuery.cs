@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Contact.Application.Queries
+namespace Contact.Application.Queries.GetContactById
 {
     public class GetContactByIdQuery : IRequest<GetContactDto>
     {

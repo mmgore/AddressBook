@@ -3,7 +3,7 @@ using Contact.Application.Exceptions;
 using Contact.Domain.AggregatesModel.ContactAggregate;
 using MediatR;
 
-namespace Contact.Application.Queries
+namespace Contact.Application.Queries.GetContactById
 {
     public class GetContactByIdQueryHandler : IRequestHandler<GetContactByIdQuery, GetContactDto>
     {
