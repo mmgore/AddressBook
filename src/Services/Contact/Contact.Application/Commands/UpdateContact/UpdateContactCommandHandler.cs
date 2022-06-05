@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Contact.Application.Commands.UpdateContact
 {
-    internal class UpdateContactCommandHandler : IRequestHandler<UpdateContactCommand, Unit>
+    public class UpdateContactCommandHandler : IRequestHandler<UpdateContactCommand, Unit>
     {
         private readonly IContactItemRepository _contactItemRepository;
         private readonly IUnitOfWork _unitOfWork;

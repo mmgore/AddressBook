@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Contact.Application.Validations
 {
-    internal class UpdateContactCommandValidator : AbstractValidator<UpdateContactCommand>
+    public class UpdateContactCommandValidator : AbstractValidator<UpdateContactCommand>
     {
         public UpdateContactCommandValidator()
         {
