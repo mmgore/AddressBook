@@ -1,3 +1,4 @@
+using Contact.Application.Automapper;
 using Contact.Application.Commands.CreateContact;
 using Contact.Domain.AggregatesModel.ContactAggregate;
 using Contact.Domain.SeedWork;
@@ -34,6 +35,9 @@ builder.Services
 
 builder.Services
     .AddMediatR(typeof(CreateContactCommandHandler).GetTypeInfo().Assembly);
+
+builder.Services
+    .AddAutoMapper(new Assembly[] { typeof(AutomapperProfile).GetTypeInfo().Assembly });
 
 builder.Services
     .AddSwaggerGen(c =>
