@@ -11,9 +11,9 @@ namespace Contact.Infrastructure.Repositories
         {
             _contactDbContext = contactDbContext ?? throw new ArgumentNullException(nameof(contactDbContext));
         }
-        public Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            await _contactDbContext.SaveChangesAsync();
         }
         protected virtual void Dispose(bool disposing)
         {
