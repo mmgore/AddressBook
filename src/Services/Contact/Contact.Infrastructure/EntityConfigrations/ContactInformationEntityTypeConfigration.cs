@@ -29,6 +29,7 @@ namespace Contact.Infrastructure.EntityConfigrations
             builder.HasOne<ContactItem>()
                 .WithMany()
                 .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasForeignKey("ContactId");
         }
     }
