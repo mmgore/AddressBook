@@ -8,6 +8,7 @@ namespace Contact.Domain.AggregatesModel.ContactAggregate
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Firm { get; private set; }
+
         public IList<ContactInformation> ContactInformations { get; private set; }
         public ContactItem()
         {

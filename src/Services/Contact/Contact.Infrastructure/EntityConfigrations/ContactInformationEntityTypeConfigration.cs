@@ -10,15 +10,15 @@ namespace Contact.Infrastructure.EntityConfigrations
         {
             builder.HasKey(b => b.Id);
 
-            builder.Property(b => b.InformationType.PhoneNumber)
+            builder.Property(b => b.PhoneNumber)
                 .HasMaxLength(15)
                 .IsRequired();
 
-            builder.Property(b => b.InformationType.EmailAddress)
+            builder.Property(b => b.EmailAddress)
                 .HasMaxLength(40)
                 .IsRequired();
 
-            builder.Property(b => b.InformationType.Location)
+            builder.Property(b => b.Location)
                 .HasMaxLength(50)
                 .IsRequired();
 
