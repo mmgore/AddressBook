@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contact.Infrastructure.Repositories
 {
-    internal class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private bool _disposed = false;
 
