@@ -1,4 +1,5 @@
 using Contact.Application.Commands.CreateContact;
+using Contact.Domain.AggregatesModel.ContactAggregate;
 using Contact.Domain.SeedWork;
 using Contact.Infrastructure;
 using Contact.Infrastructure.Repositories;
@@ -22,6 +23,10 @@ builder.Services
     .AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services
     .AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services
+    .AddScoped<IContactItemRepository, ContactItemRepository>();
+builder.Services
+    .AddScoped<IContactInformationRepository, ContactInformationRepository>();
 
 builder.Services
     .AddDbContext<ContactContext>(opt
