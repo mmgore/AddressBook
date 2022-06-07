@@ -14,7 +14,7 @@ namespace Contact.Infrastructure
         {
         }
 
-        public DbSet<ContactItem> Contacts { get; set; }
+        public DbSet<ContactItem> ContactItems { get; set; }
         public DbSet<ContactInformation> ContactInformations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

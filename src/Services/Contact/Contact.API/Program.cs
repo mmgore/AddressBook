@@ -31,7 +31,7 @@ builder.Services
 
 builder.Services
     .AddDbContext<ContactContext>(opt
-    => opt.UseSqlServer(builder.Configuration.GetConnectionString("AddressBookDatabase")));
+    => opt.UseSqlServer(builder.Configuration.GetConnectionString("AddressDatabase")));
 
 builder.Services
     .AddMediatR(typeof(CreateContactCommandHandler).GetTypeInfo().Assembly);

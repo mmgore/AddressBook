@@ -25,12 +25,12 @@ namespace Contact.Application.Commands.CreateContactInfo
         public async Task<Unit> Handle(CreateContactInfoCommand request, CancellationToken cancellationToken)
         {
             
-            var contact = await _contactItemRepository.GetContactItemById(request.ContactId);
+            var contact = await _contactItemRepository.GetContactItemById(request.ContactItemId);
             if (contact == null)
             {
-                throw new NotFoundException(nameof(contact), request.ContactId);
+                throw new NotFoundException(nameof(contact), request.ContactItemId);
             }
-            var contactInfo = ContactInformation.Create(request.ContactId, request.PhoneNumber, request.EmailAddress, request.Location, request.Content);
+            var contactInfo = ContactInformation.Create(request.ContactItemId, request.PhoneNumber, request.EmailAddress, request.Location, request.Content);
 
             await _contactInformationRepository.InsertAsync(contactInfo);
             await _unitOfWork.SaveChangesAsync();

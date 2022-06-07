@@ -27,10 +27,10 @@ namespace Contact.Infrastructure.EntityConfigrations
                 .IsRequired();
 
             builder.HasOne<ContactItem>()
-                .WithMany()
+                .WithMany(b => b.ContactInformations)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasForeignKey("ContactId");
+                .HasForeignKey(c => c.ContactItemId);
         }
     }
 }

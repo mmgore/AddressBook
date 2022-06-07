@@ -5,24 +5,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Contact.Infrastructure.Migrations
 {
-    public partial class initalmodel : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Contacts",
+                name: "ContactItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Firm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Firm = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contacts", x => x.Id);
+                    table.PrimaryKey("PK_ContactItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,12 +30,11 @@ namespace Contact.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ContactId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ContactItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -43,10 +42,11 @@ namespace Contact.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_ContactInformations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContactInformations_Contacts_ContactItemId",
+                        name: "FK_ContactInformations_ContactItems_ContactItemId",
                         column: x => x.ContactItemId,
-                        principalTable: "Contacts",
-                        principalColumn: "Id");
+                        principalTable: "ContactItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -61,7 +61,7 @@ namespace Contact.Infrastructure.Migrations
                 name: "ContactInformations");
 
             migrationBuilder.DropTable(
-                name: "Contacts");
+                name: "ContactItems");
         }
     }
 }

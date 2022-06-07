@@ -1,5 +1,6 @@
 ﻿using Contact.Domain.AggregatesModel.ContactAggregate;
 using Contact.Domain.SeedWork;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Contact.Infrastructure.Repositories
@@ -23,8 +24,11 @@ namespace Contact.Infrastructure.Repositories
             => await _repository.GetAsync(id);
 
         public async Task<IEnumerable<ContactItem>> GetContactItems()
-            => await _repository.GetAllAsync();
+            =>  await _repository.GetAllAsync();
 
+        public async Task<ContactItem> GetContactItemsWithInfos(Guid id)
+            => await _repository.Queryable(x => x.Id == id).Include(c => c.ContactInformations).FirstOrDefaultAsync();
+        
         public async Task InsertAsync(ContactItem item)
         {
             await _repository.InsertAsync(item);

@@ -10,5 +10,6 @@ namespace Contact.Domain.AggregatesModel.ContactAggregate
         Task<ContactItem> GetContactItemById(Guid id);
         Task<ContactItem> GetContactItem(Expression<Func<ContactItem, bool>> predicate);
         Task<IEnumerable<ContactItem>> GetContactItems();
+        Task<ContactItem> GetContactItemsWithInfos(Guid id);
     }
 }

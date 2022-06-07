@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Contact.Infrastructure.Migrations
 {
     [DbContext(typeof(ContactContext))]
-    [Migration("20220605161153_added-cascade-delete")]
-    partial class addedcascadedelete
+    [Migration("20220607212518_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,10 +30,7 @@ namespace Contact.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ContactItemId")
+                    b.Property<Guid>("ContactItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
@@ -63,8 +60,6 @@ namespace Contact.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContactId");
 
                     b.HasIndex("ContactItemId");
 
@@ -100,20 +95,16 @@ namespace Contact.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("ContactItems");
                 });
 
             modelBuilder.Entity("Contact.Domain.AggregatesModel.ContactAggregate.ContactInformation", b =>
                 {
                     b.HasOne("Contact.Domain.AggregatesModel.ContactAggregate.ContactItem", null)
-                        .WithMany()
-                        .HasForeignKey("ContactId")
+                        .WithMany("ContactInformations")
+                        .HasForeignKey("ContactItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Contact.Domain.AggregatesModel.ContactAggregate.ContactItem", null)
-                        .WithMany("ContactInformations")
-                        .HasForeignKey("ContactItemId");
                 });
 
             modelBuilder.Entity("Contact.Domain.AggregatesModel.ContactAggregate.ContactItem", b =>
