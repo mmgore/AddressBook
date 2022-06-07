@@ -3,6 +3,7 @@ using Contact.Application.Commands.DeleteContact;
 using Contact.Application.Commands.UpdateContact;
 using Contact.Application.Queries.GetContactById;
 using Contact.Application.Queries.GetContacts;
+using Contact.Application.Queries.GetContactWithContactInfo;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,5 +55,12 @@ namespace Contact.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<GetAllContactViewModel>> GetContacts()
             => Ok(await _mediator.Send(new GetContactsQuery()));
+
+        [Route("api/v1/ContactsWithInfo/{id}")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<GetContactWithContactInfoViewModel>> GetContactsWitInfos([FromRoute] Guid id)
+            => Ok(await _mediator.Send(new GetContactWithContactInfoQuery(id)));
     }
 }
