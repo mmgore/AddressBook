@@ -17,11 +17,11 @@ namespace Contact.Application.Queries.GetContactById
         }
         public async Task<GetContactDto> Handle(GetContactByIdQuery request, CancellationToken cancellationToken)
         {
-            var contact = await _contactItemRepository.GetContactItemById(request.ContactId);
+            var contact = await _contactItemRepository.GetContactItemById(request.ContactItemId);
 
             if (contact == null)
             {
-                throw new NotFoundException(nameof(ContactItem), request.ContactId);
+                throw new NotFoundException(nameof(ContactItem), request.ContactItemId);
             }
 
             return _mapper.Map<GetContactDto>(contact);

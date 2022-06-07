@@ -4,7 +4,7 @@ namespace Contact.Application.Queries.GetContactById
 {
     public class GetContactByIdQuery : IRequest<GetContactDto>
     {
-        public Guid ContactId { get; set; }
+        public Guid ContactItemId { get; set; }
     }
 
     public class GetContactDto
