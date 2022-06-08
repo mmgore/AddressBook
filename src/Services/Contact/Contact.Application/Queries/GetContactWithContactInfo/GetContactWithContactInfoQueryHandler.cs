@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Contact.Application.Queries.GetContactWithContactInfo
 {
-    public class GetContactWithContactInfoQueryHandler : IRequestHandler<GetContactWithContactInfoQuery, GetContactWithContactInfoViewModel>
+    public class GetContactWithContactInfoQueryHandler : IRequestHandler<GetContactWithContactInfoQuery, GetContactWithContactInfosDto>
     {
         private readonly IContactItemRepository _contactItemRepository;
         private readonly IMapper _mapper;
@@ -19,11 +19,19 @@ namespace Contact.Application.Queries.GetContactWithContactInfo
             _contactItemRepository = contactItemRepository ?? throw new ArgumentNullException(nameof(contactItemRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-        public async Task<GetContactWithContactInfoViewModel> Handle(GetContactWithContactInfoQuery request, CancellationToken cancellationToken)
+        public async Task<GetContactWithContactInfosDto> Handle(GetContactWithContactInfoQuery request, CancellationToken cancellationToken)
         {
             var contactWithInfos = await _contactItemRepository.GetContactItemsWithInfos(request.Id);
 
-            return null;
+            var contactWithInfosDto = _mapper.Map<GetContactWithContactInfosDto>(contactWithInfos);
+
+            foreach (var contactInfo in contactWithInfos.ContactInformations)
+            {
+                var contactInfoDto = _mapper.Map<ContactInfoDto>(contactInfo);
+                contactWithInfosDto.ContactInfos.Add(contactInfoDto);
+            }
+
+            return contactWithInfosDto;
 
         }
     }

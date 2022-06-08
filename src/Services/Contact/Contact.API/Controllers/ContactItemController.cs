@@ -47,7 +47,7 @@ namespace Contact.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<GetContactDto>> GetContactById(Guid contactId)
-            => Ok(await _mediator.Send(new GetContactByIdQuery { ContactId = contactId }));
+            => Ok(await _mediator.Send(new GetContactByIdQuery { ContactItemId = contactId }));
 
         [Route("api/v1/Contacts")]
         [HttpGet]
@@ -60,7 +60,7 @@ namespace Contact.API.Controllers
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GetContactWithContactInfoViewModel>> GetContactsWitInfos([FromRoute] Guid id)
+        public async Task<ActionResult<GetContactWithContactInfosDto>> GetContactsWitInfos([FromRoute] Guid id)
             => Ok(await _mediator.Send(new GetContactWithContactInfoQuery(id)));
     }
 }

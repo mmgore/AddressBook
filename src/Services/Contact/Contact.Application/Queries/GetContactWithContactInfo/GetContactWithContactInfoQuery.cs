@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contact.Application.Queries.GetContactWithContactInfo
 {
-    public class GetContactWithContactInfoQuery : IRequest<GetContactWithContactInfoViewModel>
+    public class GetContactWithContactInfoQuery : IRequest<GetContactWithContactInfosDto>
     {
         public Guid Id { get; private set; }
         public GetContactWithContactInfoQuery(Guid id)
@@ -16,26 +16,22 @@ namespace Contact.Application.Queries.GetContactWithContactInfo
         }
     }
     
-    public class GetContactWithContactInfoDto
+    public class GetContactWithContactInfosDto
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Firm { get; set; }
-        public List<ContactInfoDto> ContactInfos { get; set; }
+        public List<ContactInfoDto> ContactInfos { get; set; } = new List<ContactInfoDto>();
     }
 
     public class ContactInfoDto
     {
-        public Guid ContactId { get; set; }
+        public Guid ContactItemId { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public string Location { get; set; }
         public string Content { get; set; }
     }
 
-    public class GetContactWithContactInfoViewModel
-    {
-        public IEnumerable<GetContactWithContactInfoDto> ContactInfos { get; set; }
-    }
 }
