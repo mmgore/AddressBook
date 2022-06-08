@@ -10,7 +10,8 @@ namespace Contact.Infrastructure
 {
     public class ContactContext : DbContext
     {
-        public ContactContext(DbContextOptions<ContactContext> options) : base(options)
+        public 
+            ContactContext(DbContextOptions<ContactContext> options) : base(options)
         {
         }
 
