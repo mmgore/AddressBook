@@ -8,8 +8,7 @@ namespace Report.API.Application.Automapper
     {
         public AutomapperProfile()
         {
-            CreateMap<ContactItemDto, ContactItem>()
-                .ReverseMap();
+            
         }
     }
 }

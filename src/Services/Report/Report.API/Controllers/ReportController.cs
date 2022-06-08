@@ -7,7 +7,7 @@ using System.Net;
 
 namespace Report.API.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class ReportController : ControllerBase
     {
@@ -17,11 +17,18 @@ namespace Report.API.Controllers
             _reportAppService = reportAppService ?? throw new ArgumentNullException(nameof(reportAppService));
         }
 
-        [Route("api/v1/Contacts")]
+        [Route("api/v1/LocationReport")]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<LocationListDto>> GetContacts()
+        public async Task<ActionResult<LocationListDto>> GetLocationList()
             => Ok(await _reportAppService.GetLocationListAsync());
+
+        [Route("api/v1/PeopleCountByLocation")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<PeopleCountByLocationDto>> GetPeopleCountByLocation()
+            => Ok(await _reportAppService.GetPeopleCountByLocations());
     }
 }

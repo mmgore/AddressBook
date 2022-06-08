@@ -34,5 +34,21 @@ namespace Report.API.Application.Services
 
             return locationListDto;
         }
+
+        public async Task<IEnumerable<PeopleCountByLocationDto>> GetPeopleCountByLocations()
+        {
+            var locations = await _contactInformationRepository.GetPeopleCountByLocations();
+
+            List<PeopleCountByLocationDto> locationListDtos = new List<PeopleCountByLocationDto>();
+            foreach (var item in locations)
+            {
+                PeopleCountByLocationDto locationDto = new PeopleCountByLocationDto();
+                locationDto.Location = item.Location;
+                locationDto.PeopleCount = item.Count.ToString();
+                locationListDtos.Add(locationDto);
+            }
+
+            return locationListDtos;
+        }
     }
 }

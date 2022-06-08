@@ -38,11 +38,26 @@ namespace Report.API.Infrastructure.Repositories
 
         public async Task<IEnumerable<ContactInformation>> GetLocationListAsync()
         {
-            return _repository.Queryable()
+            return await _repository.Queryable()
                                         .GroupBy(x => x.Location)
                                         .Select(p => new ContactInformation { Location = p.Key, Count = p.Count() })
                                         .OrderByDescending(o => o.Count)
-                                        .ToList();
+                                        .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ContactInformation>> GetPeopleCountByLocations()
+        {
+            var data = await _repository.Queryable()
+                                        .GroupBy(x => new { x.Location, x.ContactItemId})
+                                        .Select(p => new ContactInformation { Location = p.Key.Location, ContactItemId = p.Key.ContactItemId, Count = p.Count() })
+                                        .OrderByDescending(o => o.Count)
+                                        .ToListAsync();
+
+            return data.GroupBy(x => x.Location)
+                       .Select(p => new ContactInformation { Location = p.Key, Count = p.Count() })
+                       .OrderByDescending(o => o.Count)
+                       .ToList();
+
         }
     }
 }
