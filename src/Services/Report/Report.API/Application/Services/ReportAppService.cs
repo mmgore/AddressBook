@@ -50,5 +50,21 @@ namespace Report.API.Application.Services
 
             return locationListDtos;
         }
+
+        public async Task<IEnumerable<PhoneNumberCountByLocationDto>> GetPhoneNumberCountByLocations()
+        {
+            var locations = await _contactInformationRepository.GetPhoneNumberCountByLocations();
+
+            List<PhoneNumberCountByLocationDto> locationListDtos = new List<PhoneNumberCountByLocationDto>();
+            foreach (var item in locations)
+            {
+                PhoneNumberCountByLocationDto locationDto = new PhoneNumberCountByLocationDto();
+                locationDto.Location = item.Location;
+                locationDto.PhoneNumberCount = item.Count.ToString();
+                locationListDtos.Add(locationDto);
+            }
+
+            return locationListDtos;
+        }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Report.API.Application.Dtos;
-using Report.API.Domain.Entities;
-using System.Collections.Generic;
 
 namespace Report.API.Application.Interfaces
 {
@@ -8,5 +6,6 @@ namespace Report.API.Application.Interfaces
     {
         Task<IEnumerable<LocationListDto>> GetLocationListAsync();
         Task<IEnumerable<PeopleCountByLocationDto>> GetPeopleCountByLocations();
+        Task<IEnumerable<PhoneNumberCountByLocationDto>> GetPhoneNumberCountByLocations();
     }
 }

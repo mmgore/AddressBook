@@ -30,5 +30,12 @@ namespace Report.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<PeopleCountByLocationDto>> GetPeopleCountByLocation()
             => Ok(await _reportAppService.GetPeopleCountByLocations());
+
+        [Route("api/v1/PhoneNumberCountByLocation")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<PeopleCountByLocationDto>> GetPhoneNumberCountByLocation()
+           => Ok(await _reportAppService.GetPhoneNumberCountByLocations());
     }
 }

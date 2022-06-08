@@ -13,5 +13,6 @@ namespace Report.API.Domain.Interfaces
         Task<IEnumerable<ContactInformation>> GetContactInformations();
         Task<IEnumerable<ContactInformation>> GetLocationListAsync();
         Task<IEnumerable<ContactInformation>> GetPeopleCountByLocations();
+        Task<IEnumerable<ContactInformation>> GetPhoneNumberCountByLocations();
     }
 }

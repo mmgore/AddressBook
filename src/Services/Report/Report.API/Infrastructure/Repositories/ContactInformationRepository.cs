@@ -59,5 +59,19 @@ namespace Report.API.Infrastructure.Repositories
                        .ToList();
 
         }
+
+        public async Task<IEnumerable<ContactInformation>> GetPhoneNumberCountByLocations()
+        {
+            var data = await _repository.Queryable()
+                                       .GroupBy(x => new { x.Location, x.PhoneNumber })
+                                       .Select(p => new ContactInformation { Location = p.Key.Location, PhoneNumber = p.Key.PhoneNumber, Count = p.Count() })
+                                       .OrderByDescending(o => o.Count)
+                                       .ToListAsync();
+
+            return data.GroupBy(x => x.Location)
+                       .Select(p => new ContactInformation { Location = p.Key, Count = p.Count() })
+                       .OrderByDescending(o => o.Count)
+                       .ToList();
+        }
     }
 }
