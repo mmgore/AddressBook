@@ -17,6 +17,11 @@ namespace Report.API.Controllers
             _reportAppService = reportAppService ?? throw new ArgumentNullException(nameof(reportAppService));
         }
 
-        
+        [Route("api/v1/Contacts")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<LocationListDto>> GetContacts()
+            => Ok(await _reportAppService.GetLocationListAsync());
     }
 }

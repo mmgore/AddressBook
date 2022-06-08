@@ -11,5 +11,6 @@ namespace Report.API.Domain.Interfaces
         Task<ContactInformation> GetContactInformationById(Guid id);
         Task<ContactInformation> GetContactInformation(Expression<Func<ContactInformation, bool>> predicate);
         Task<IEnumerable<ContactInformation>> GetContactInformations();
+        Task<IEnumerable<ContactInformation>> GetLocationListAsync();
     }
 }

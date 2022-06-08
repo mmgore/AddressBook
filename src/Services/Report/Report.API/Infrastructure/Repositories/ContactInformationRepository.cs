@@ -1,4 +1,5 @@
-﻿using Report.API.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Report.API.Domain.Entities;
 using Report.API.Domain.Interfaces;
 using System.Linq.Expressions;
 
@@ -33,6 +34,15 @@ namespace Report.API.Infrastructure.Repositories
         public async Task UpdateAsync(ContactInformation contactInfo)
         {
             await _repository.UpdateAsync(contactInfo);
+        }
+
+        public async Task<IEnumerable<ContactInformation>> GetLocationListAsync()
+        {
+            return _repository.Queryable()
+                                        .GroupBy(x => x.Location)
+                                        .Select(p => new ContactInformation { Location = p.Key, Count = p.Count() })
+                                        .OrderByDescending(o => o.Count)
+                                        .ToList();
         }
     }
 }
