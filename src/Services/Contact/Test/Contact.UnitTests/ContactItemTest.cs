@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contact.Application.Automapper;
 using Contact.Application.Commands.CreateContact;
+using Contact.Application.Commands.CreateContactInfo;
 using Contact.Application.Commands.DeleteContact;
 using Contact.Application.Commands.UpdateContact;
 using Contact.Application.Exceptions;
@@ -9,15 +10,11 @@ using Contact.Application.Validations;
 using Contact.Domain.AggregatesModel.ContactAggregate;
 using Contact.Domain.Exceptions;
 using Contact.Domain.SeedWork;
-using Contact.Infrastructure.Repositories;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -57,6 +54,48 @@ namespace Contact.UnitTests
 
             sut.Should().Throw<ContactDomainException>()
                 .WithMessage("Firm cannot be null");
+        }
+
+        [Theory]
+        [InlineData("", false)]
+        [InlineData("fakeName", true)]
+        public void Validate_create_contact_command(string name, bool expected)
+        {
+            CreateContactCommandValidator validator = new CreateContactCommandValidator();
+
+            var fakeContact = fakeContactItem;
+            var cmd = new CreateContactCommand() { FirstName = name, LastName = fakeContact.LastName, Firm = fakeContact.Firm, PhoneNumber = fakeContactInfo.PhoneNumber, EmailAddress = fakeContactInfo.EmailAddress, Location = fakeContactInfo.Location, Content = fakeContactInfo.Content };
+
+            var sut = validator.Validate(cmd);
+            sut.IsValid.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("", false)]
+        [InlineData("fakeNumber", true)]
+        public void Validate_create_contact_info_command(string phoneNumber, bool expected)
+        {
+            CreateContactInfoCommandValidator validator = new CreateContactInfoCommandValidator();
+
+            var fakeContactInformation = fakeContactInfo;
+            var cmd = new CreateContactInfoCommand() { PhoneNumber = phoneNumber, EmailAddress = fakeContactInformation.EmailAddress, Location = fakeContactInformation.Location, Content = fakeContactInformation.Content };
+
+            var sut = validator.Validate(cmd);
+            sut.IsValid.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("", false)]
+        [InlineData("fakeName", true)]
+        public void Validate_update_contact_command(string name, bool expected)
+        {
+            UpdateContactCommandValidator validator = new UpdateContactCommandValidator();
+
+            var fakeContact = fakeContactItem;
+            var cmd = new UpdateContactCommand() { FirstName = name, LastName = fakeContact.LastName, Firm = fakeContact.Firm};
+
+            var sut = validator.Validate(cmd);
+            sut.IsValid.Should().Be(expected);
         }
 
         [Fact]
@@ -167,7 +206,7 @@ namespace Contact.UnitTests
 
             sut.Should().ThrowAsync<NotFoundException>();
         }
-
+        
         private ContactItem fakeContactItem => ContactItem.Create(firsName, lastName, firm);
         private ContactInformation fakeContactInfo => ContactInformation.Create(fakeContactItem.Id, phoneNumber, email, location, content);
         private string firsName => "fakeName";
